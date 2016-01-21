@@ -17,11 +17,19 @@ public class MainCharacterControl : MonoBehaviour {
 		var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 		transform.position += move * speed * Time.deltaTime;
 	
-		if (Input.GetAxis ("Horizontal") != 0) {
+		if (Input.GetAxis ("Horizontal") > 0) {
 			GetComponent<Animator>().SetFloat("DirX", move.x);
+		}
+		if (Input.GetAxis ("Horizontal") < 0) {
+			flip ();
+			GetComponent<Animator>().SetFloat("DirX",move.x);
+
 		}
 
 	}
-
+	void flip(){
+	Vector3 theScale = transform.localScale;
+	theScale.x *= -1;
+	transform.localScale = theScale;
 	}
-
+}
